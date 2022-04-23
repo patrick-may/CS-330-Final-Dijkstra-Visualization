@@ -21,6 +21,7 @@ def whole_djikstra(G):
 
     per_frame_list = [] #list of a graph for each frame of anim
     frame_graph = copy.deepcopy(G)
+
     #start by setting all node distances except source to infinite.
     for node in node_list:
         if node != start_node:
@@ -42,8 +43,6 @@ def whole_djikstra(G):
     nx.set_edge_attributes(frame_graph, 2, name="thickness")
     
     per_frame_list.append(frame_graph)
-
-    curr_frame = 1
 
     while len(node_queue):  # while items in node_queue
         work_node = min(node_queue) 
