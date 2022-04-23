@@ -27,6 +27,9 @@ def blit(Nodes, Edges):
     ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=1200, repeat=False, fargs=(fig, Djikstra_Updates))
     plt.show()
     
+    #import save_to
+    
+
 #update function that will update the graph to a new "Frame/Iteration" of Djikstras algorithm
 def update_graph(frame, fig, update_list):
     import frame_gen
@@ -50,7 +53,7 @@ def get_graph_inp():
     """
 
     import get_data
-    Nodes, Edges = get_data.get_random_gnp(20)
+    Nodes, Edges = get_data.get_random_normal(3, 16)
     #Nodes, Edges = get_data.get_file()
     return Nodes, Edges
 

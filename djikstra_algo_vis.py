@@ -1,6 +1,16 @@
 import networkx as nx
 import copy
 
+def get_path(prev_dict, current_node, start_node):
+    path_edges = []
+    prior_node = 0
+    while(current_node != start_node):
+        prior_node = prev_dict[current_node]
+        path_edges.append( (current_node, prior_node) )
+        current_node = prior_node
+    path_edges.append( (current_node, prior_node) )
+    return path_edges 
+    
 def whole_djikstra(G):
     """
     Given a networkx graph G,
@@ -70,22 +80,13 @@ def whole_djikstra(G):
             frame_graph.nodes[n]["rename"] = str(n) + ": " + str(dist[n])
 
         for adj_node in G.adj[work_node]:
-            
+            if adj_node not in [X[1] for X in node_queue]:
+                continue
 
             individual_frame = copy.deepcopy(frame_graph)
 
             alt_path = dist[work_node] + G[work_node][adj_node]["weight"]
           
-            for e in G.edges:
-                if e == (work_node, adj_node) or e == (adj_node, work_node):
-                    
-                    individual_frame[e[0]][e[1]]["color"] = "red"
-                    individual_frame[e[0]][e[1]]["thickness"] = 10
-                    
-                else:
-                    individual_frame[e[0]][e[1]]["color"] = "gray"
-                    individual_frame[e[0]][e[1]]["thickness"] = 2
-                   
             if alt_path < dist[adj_node]:
                 
                 node_queue = [ (alt_path, adj_node) if item == (dist[adj_node], adj_node) else item for item in node_queue]
@@ -94,6 +95,22 @@ def whole_djikstra(G):
                 predecessor_dict[adj_node] = work_node  #  each node points to its predecessor in path, follow pointers
                                                         #  until start node is reached to construct physical shortest path
             
+            edge_path = get_path(predecessor_dict, work_node, start_node)
+            for e in G.edges:
+
+                if e == (work_node, adj_node) or e == (adj_node, work_node):
+                    
+                    individual_frame[e[0]][e[1]]["color"] = "red"
+                    individual_frame[e[0]][e[1]]["thickness"] = 10
+                
+                elif e in edge_path or e in [tup[::-1] for tup in edge_path]:
+                    individual_frame[e[0]][e[1]]["color"] = "red"
+                    individual_frame[e[0]][e[1]]["thickness"] = 7
+
+                else:
+                    individual_frame[e[0]][e[1]]["color"] = "gray"
+                    individual_frame[e[0]][e[1]]["thickness"] = 2
+                   
             per_frame_list.append(individual_frame)
                
     print("Distance dictionary from origin node:\n",dist)

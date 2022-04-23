@@ -18,7 +18,7 @@ def graph_anim_frame(fig, update_list):
     
     current_frame_graph = update_list[1][update_list[0]]
 
-    pos = nx.spring_layout(current_frame_graph, seed=0, k=0.8)
+    pos = nx.spring_layout(current_frame_graph, seed=0, k=0.2)
 
     #get all the special info we got in djikstra_algo_vis.py from current graph
     
