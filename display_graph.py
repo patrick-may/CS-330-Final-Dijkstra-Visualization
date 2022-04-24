@@ -17,6 +17,7 @@ def blit(Nodes, Edges):
     # graph setup
     pos = nx.spring_layout(G, seed=0)
     nx.draw(G, pos, with_labels=True)
+    
 
     # animation portion
     # applies Djikstra's visualization to graph G
@@ -24,7 +25,7 @@ def blit(Nodes, Edges):
     framect = len(Djikstra_Updates[1])-1
 
     # generates animation and then shows to screen
-    ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=1200, repeat=False, fargs=(fig, Djikstra_Updates))
+    ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=700, repeat=False, fargs=(fig, Djikstra_Updates))
     plt.show()
     
     #import save_to
@@ -53,7 +54,7 @@ def get_graph_inp():
     """
 
     import get_data
-    Nodes, Edges = get_data.get_random_normal(3, 16)
+    Nodes, Edges = get_data.get_random_normal(4, 20)
     #Nodes, Edges = get_data.get_file()
     return Nodes, Edges
 
