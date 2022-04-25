@@ -42,7 +42,6 @@ def get_update_vis(G):
     import djikstra_algo_vis
     
     # normally call Djikstra's ordering algo here on graph G
-    # Edge_Order = djikstra_algo_vis.whole_djikstra(G)
     Graph_Frame_Dict = djikstra_algo_vis.whole_djikstra(G)
     return [ 0, Graph_Frame_Dict]
 
@@ -54,7 +53,7 @@ def get_graph_inp():
     """
 
     import get_data
-    Nodes, Edges = get_data.get_random_normal(4, 20)
+    Nodes, Edges = get_data.get_random_gnp(14)
     #Nodes, Edges = get_data.get_file()
     return Nodes, Edges
 

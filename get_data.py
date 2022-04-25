@@ -64,6 +64,7 @@ def get_random_lobster(num_back_nodes):
         Edge_tuple = (e[0], e[1], random.randint(1, 10))
         Weighted_Edges.append(Edge_tuple)
 
+    
     return Nodes, Weighted_Edges
 
 # currently not fully working
@@ -86,9 +87,9 @@ def get_file():
         for line in inp_file:
             line_data = line.split()
             if(line_data[0] == "N"):
-                Nodes.append( line_data[1] )
+                Nodes.append( int(line_data[1]) )
             elif(line_data[0] == "E"):
-                Weighted_Edges.append( (tuple(line_data[1:4])) )
+                Weighted_Edges.append( (tuple(int(i) for i in line_data[1:4])) )
 
     return Nodes, Weighted_Edges
 

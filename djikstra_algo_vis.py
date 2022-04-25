@@ -2,13 +2,20 @@ import networkx as nx
 import copy
 
 def get_path(prev_dict, current_node, start_node):
+    """
+    Follow pointer dictionary prev_dict to construct list of edges that is a path backwards
+    from current working node in djikstra's algo to the progenitor node
+    """
     path_edges = []
-    prior_node = 0
+    prior_node = current_node
+    
     while(current_node != start_node):
         prior_node = prev_dict[current_node]
         path_edges.append( (current_node, prior_node) )
         current_node = prior_node
+
     path_edges.append( (current_node, prior_node) )
+
     return path_edges 
     
 def whole_djikstra(G):
@@ -25,7 +32,7 @@ def whole_djikstra(G):
     node_list = list(G.nodes)
     
     dist = {start_node:0}
-    predecessor_dict = {}
+    predecessor_dict = {start_node: start_node}
     node_queue = []
 
     per_frame_list = [] #list of a graph for each frame of anim
@@ -111,8 +118,8 @@ def whole_djikstra(G):
             per_frame_list.append(individual_frame)
 
     # printing these as they are the normal Djikstra's algorithm results to discuss         
-    print("Distance dictionary from origin node:\n",dist)
-    print("Predecessor pointer dictionary to work backwards to origin:\n",predecessor_dict)
+    print("Distance dictionary from origin node:\n",dict(sorted(dist.items())))
+    print("Predecessor pointer dictionary to work backwards to origin:\n",dict(sorted(predecessor_dict.items())))
     
     # creating one last frame to show, with no active path finding
     finish_frame=copy.deepcopy(per_frame_list[-1])
