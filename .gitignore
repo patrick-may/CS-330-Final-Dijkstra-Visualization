@@ -1,3 +1,4 @@
 env/
 __pycache__/
 save_to.py
+*.txt
