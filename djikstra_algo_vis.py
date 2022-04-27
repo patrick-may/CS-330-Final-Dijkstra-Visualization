@@ -90,7 +90,8 @@ def whole_djikstra(G):
             # for each adjacent node to the work node, see if its path is shorter than prior believed distance          
             if alt_path < dist[adj_node]:
                 # if so, update queue with proper distances, adjust predecessor dict and distance dict
-                node_queue = [ (alt_path, adj_node) if item == (dist[adj_node], adj_node) else item for item in node_queue]
+                #node_queue = [ (alt_path, adj_node) if item == (dist[adj_node], adj_node) else item for item in node_queue]
+                node_queue[node_queue.index((dist[adj_node], adj_node))] = (alt_path, adj_node)
                 dist[adj_node] = alt_path
                 predecessor_dict[adj_node] = work_node  #  each node points to its predecessor in path, follow pointers
                                                         #  until start node is reached to construct physical shortest path
@@ -137,7 +138,7 @@ def whole_djikstra(G):
 ## UNUSUED TESTING CODE FOR INDIVIDUAL SCRIPT TESTING
 def main():
     import get_data
-    Nodes, Edges = get_data.get_random_normal(4, 10)
+    Nodes, Edges = get_data.get_random_normal(3, 12)
     G = nx.Graph()
     G.add_nodes_from(Nodes)
     G.add_weighted_edges_from(Edges)
