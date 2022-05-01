@@ -18,7 +18,7 @@ def get_path(prev_dict, current_node, start_node):
 
     return path_edges 
     
-def whole_djikstra(G):
+def whole_dijkstra(G):
     """
     Given a networkx graph G,
     This function will calculate all least-cost paths to all other nodes from start_node
@@ -118,7 +118,7 @@ def whole_djikstra(G):
             #add graph as a frame to display
             per_frame_list.append(individual_frame)
 
-    # printing these as they are the normal Djikstra's algorithm results to discuss         
+    # printing these as they are the normal Dijkstra's algorithm results to discuss         
     print("Distance dictionary from origin node:\n",dict(sorted(dist.items())))
     print("Predecessor pointer dictionary to work backwards to origin:\n",dict(sorted(predecessor_dict.items())))
     
@@ -142,7 +142,7 @@ def main():
     G = nx.Graph()
     G.add_nodes_from(Nodes)
     G.add_weighted_edges_from(Edges)
-    whole_djikstra(G)
+    whole_dijkstra(G)
 
 if __name__ == "__main__":
     main()

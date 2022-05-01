@@ -28,7 +28,7 @@ def blit(Nodes, Edges):
     ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=1200, repeat=False, fargs=(fig, Djikstra_Updates))
     plt.show()
     
-    #import save_to
+    #import save_to (saving animations currently not functional)
     
 
 #update function that will update the graph to a new "Frame/Iteration" of Djikstras algorithm
@@ -39,7 +39,7 @@ def update_graph(frame, fig, update_list):
 # gets list of edges from other portion of the project to show djikstra's in the order that they should
 # be highlighted in
 def get_update_vis(G):
-    import djikstra_algo_vis
+    import dijkstra_algo_vis
     
     # normally call Djikstra's ordering algo here on graph G
     Graph_Frame_Dict = djikstra_algo_vis.whole_djikstra(G)
@@ -53,7 +53,7 @@ def get_graph_inp():
     """
 
     import get_data
-    Nodes, Edges = get_data.get_random_normal(3, 12)
+    Nodes, Edges = get_data.get_random_normal(4, 14)
     #Nodes, Edges = get_data.get_file()
     return Nodes, Edges
 

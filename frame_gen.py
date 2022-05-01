@@ -1,4 +1,3 @@
-from os import rename
 import networkx as nx
 
 def graph_anim_frame(fig, update_list):
@@ -20,7 +19,7 @@ def graph_anim_frame(fig, update_list):
 
     pos = nx.spring_layout(current_frame_graph, seed=0, k=0.2)
 
-    #get all the special info we got in djikstra_algo_vis.py from current graph
+    # get all the special info we got in dijkstra_algo_vis.py from current graph
     
     node_colors = list(nx.get_node_attributes(current_frame_graph, "color").values())
     
@@ -32,6 +31,7 @@ def graph_anim_frame(fig, update_list):
     
     edge_label_loc = nx.get_edge_attributes(current_frame_graph, "weight")
 
+    # draw graph with all special information as part of drawn visualization
     nx.draw(current_frame_graph, pos,  edge_color=edge_colors, node_color=node_colors, node_size=1000, 
             font_size=14, font_weight="bold", width=edge_thick, labels=node_renames, with_labels=True)
     nx.draw_networkx_edge_labels(current_frame_graph, pos, edge_labels=edge_label_loc)
