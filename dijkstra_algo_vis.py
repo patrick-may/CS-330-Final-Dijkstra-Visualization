@@ -1,10 +1,15 @@
+"""CS 330 Spring 2022 Final Project by Patrick May, Angad Singh
+The research and direction for how to design our implementation of dijkstra's algorithm was done by Angad
+Python implementation and visualization portoin by Patrick
+Worked on by: both
+"""
 import networkx as nx
 import copy
 
 def get_path(prev_dict, current_node, start_node):
     """
     Follow pointer dictionary prev_dict to construct list of edges that is a path backwards
-    from current working node in djikstra's algo to the progenitor node
+    from current working node in dijkstra's algo to the progenitor node
     """
     path_edges = []
     prior_node = current_node
@@ -22,14 +27,13 @@ def whole_dijkstra(G):
     """
     Given a networkx graph G,
     This function will calculate all least-cost paths to all other nodes from start_node
-    Will a list of Graphs, each graph corresponding to a frame that should be displayed
+    Will return a list of Graphs, each graph corresponding to a frame that should be displayed
         Specific attributes are enclosed in each graph that are used in frame_gen.py (not fully decoupled, just have
         to know to use "thickness", "color", "weight", etc)
-
     """
+
     print("Enter name of starting node")
     start_node = int(input())
-    node_list = list(G.nodes)
     
     dist = {start_node:0}
     predecessor_dict = {start_node: start_node}
@@ -39,7 +43,7 @@ def whole_dijkstra(G):
     frame_graph = copy.deepcopy(G)
 
     #start by setting all node distances except source to infinite.
-    for node in node_list:
+    for node in G.nodes:
         if node != start_node:
             dist[node] = float('inf')
 
@@ -90,8 +94,7 @@ def whole_dijkstra(G):
             # for each adjacent node to the work node, see if its path is shorter than prior believed distance          
             if alt_path < dist[adj_node]:
                 # if so, update queue with proper distances, adjust predecessor dict and distance dict
-                #node_queue = [ (alt_path, adj_node) if item == (dist[adj_node], adj_node) else item for item in node_queue]
-                node_queue[node_queue.index((dist[adj_node], adj_node))] = (alt_path, adj_node)
+                node_queue[node_queue.index((dist[adj_node], adj_node))] = (alt_path, adj_node) # change priority of adj_node
                 dist[adj_node] = alt_path
                 predecessor_dict[adj_node] = work_node  #  each node points to its predecessor in path, follow pointers
                                                         #  until start node is reached to construct physical shortest path
@@ -126,10 +129,10 @@ def whole_dijkstra(G):
     finish_frame=copy.deepcopy(per_frame_list[-1])
     nx.set_node_attributes(finish_frame, "blue", name="color")
     finish_frame.nodes[start_node]["color"] = "yellow"
-   
+  
     nx.set_edge_attributes(finish_frame, "gray", name="color")
     nx.set_edge_attributes(finish_frame, 2, name="thickness")
-    
+
 
     per_frame_list.append(finish_frame)
 

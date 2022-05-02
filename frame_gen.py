@@ -1,3 +1,7 @@
+"""CS 330 Spring 2022 Final Project by Patrick May, Angad Singh
+This graph generating function had multiple iterations before our most recent design
+Worked on by: Patrick + Angad
+"""
 import networkx as nx
 
 def graph_anim_frame(fig, update_list):
@@ -32,6 +36,8 @@ def graph_anim_frame(fig, update_list):
     edge_label_loc = nx.get_edge_attributes(current_frame_graph, "weight")
 
     # draw graph with all special information as part of drawn visualization
+    # does main work of drawing an individual graph
+    # documentation for nx.draw found here: https://networkx.org/documentation/stable/reference/drawing.html
     nx.draw(current_frame_graph, pos,  edge_color=edge_colors, node_color=node_colors, node_size=1000, 
             font_size=14, font_weight="bold", width=edge_thick, labels=node_renames, with_labels=True)
     nx.draw_networkx_edge_labels(current_frame_graph, pos, edge_labels=edge_label_loc)

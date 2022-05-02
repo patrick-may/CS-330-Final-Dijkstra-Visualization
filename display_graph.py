@@ -1,3 +1,8 @@
+"""CS 330 Spring 2022 Final Project by Patrick May, Angad Singh
+driver file that runs the whole thing, mainly handles coupling other files
+sets up and handles the initial animation call
+Worked on by: Patrick
+"""
 from matplotlib import pyplot as plt, animation
 import networkx as nx
 
@@ -13,36 +18,33 @@ def blit(Nodes, Edges):
         G.add_node(n)
 
     G.add_weighted_edges_from(Edges)
-
-    # graph setup
-    pos = nx.spring_layout(G, seed=0)
-    nx.draw(G, pos, with_labels=True)
     
-
     # animation portion
-    # applies Djikstra's visualization to graph G
-    Djikstra_Updates = get_update_vis(G)
-    framect = len(Djikstra_Updates[1])-1
+    # applies Dijkstra's visualization to graph G
+    Dijkstra_Updates = get_update_vis(G)
+    framect = len(Dijkstra_Updates[1])-1
 
-    # generates animation and then shows to screen
-    ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=1200, repeat=False, fargs=(fig, Djikstra_Updates))
+    # uses matplotlib to make an animation with update function update_graph
+    # documentation here: https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.animation.FuncAnimation.html
+    #changing interval (value in ms) changes how fast each frame changes
+    ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=2000, repeat=False, fargs=(fig, Dijkstra_Updates))
     plt.show()
     
     #import save_to (saving animations currently not functional)
     
-
-#update function that will update the graph to a new "Frame/Iteration" of Djikstras algorithm
+#update function that will update the graph to a new "Frame/Iteration" of Dijkstras algorithm
 def update_graph(frame, fig, update_list):
     import frame_gen
     frame_gen.graph_anim_frame(fig, update_list)
 
-# gets list of edges from other portion of the project to show djikstra's in the order that they should
+# gets list of edges from other portion of the project to show dijkstra's in the order that they should
 # be highlighted in
 def get_update_vis(G):
+    #this is the main coupling between djikstra algo portion and visualization portion
     import dijkstra_algo_vis
     
-    # normally call Djikstra's ordering algo here on graph G
-    Graph_Frame_Dict = djikstra_algo_vis.whole_djikstra(G)
+    # normally call Dijkstra's ordering algo here on graph G
+    Graph_Frame_Dict = dijkstra_algo_vis.whole_dijkstra(G)
     return [ 0, Graph_Frame_Dict]
 
 # helper function to get any graph input in Node and Edge form, allows for easier extension of input types
