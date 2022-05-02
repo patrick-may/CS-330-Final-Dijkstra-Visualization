@@ -1,6 +1,6 @@
 """CS 330 Spring 2022 Final Project by Patrick May, Angad Singh
 The research and direction for how to design our implementation of dijkstra's algorithm was done by Angad
-Python implementation and visualization portoin by Patrick
+Python implementation and visualization portion by Patrick
 Worked on by: both
 """
 import networkx as nx
