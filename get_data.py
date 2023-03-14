@@ -40,7 +40,7 @@ def get_random_gnp(num_nodes):
     To us, a gnp graph has more random distribution of edges per node compared to
     random_normal and not as unpredictable as random_lobster
     Documentation on what gnp graph is found here: https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model"""
-    random.seed(time.gmtime())
+    random.seed(time.localtime().tm_sec)
     G = nx.fast_gnp_random_graph(num_nodes, 0.25)
     Nodes = list(G)
     Edges = G.edges
@@ -60,7 +60,7 @@ def get_random_lobster(num_back_nodes):
     Edge weight is randomly assigned between 1-10
     """
 
-    random.seed(time.gmtime())
+    random.seed(time.localtime().tm_sec)
     prob_tail = random.random()
     prob_extra = random.random()
     G = nx.random_lobster(num_back_nodes, prob_tail, prob_extra)

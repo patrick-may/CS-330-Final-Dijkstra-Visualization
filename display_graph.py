@@ -22,13 +22,18 @@ def blit(Nodes, Edges):
     # animation portion
     # applies Dijkstra's visualization to graph G
     Dijkstra_Updates = get_update_vis(G)
-    framect = len(Dijkstra_Updates[1])-1
+    framect = len(Dijkstra_Updates[1])
 
     # uses matplotlib to make an animation with update function update_graph
     # documentation here: https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.animation.FuncAnimation.html
     #changing interval (value in ms) changes how fast each frame changes
-    ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=500, repeat=True, fargs=(fig, Dijkstra_Updates))
-    plt.show()
+    ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=1000, repeat=True, fargs=(fig, Dijkstra_Updates))
+    
+    """uncomment the plt.show below to view the animation"""
+    #plt.show()
+
+    """comment out command below to *not* save a gif of the visualization"""
+    ani.save("graph.gif",fps=2)
     
     #import save_to (saving animations currently not functional)
     
@@ -55,7 +60,7 @@ def get_graph_inp():
     """
 
     import get_data
-    Nodes, Edges = get_data.get_random_normal(4, 14)
+    Nodes, Edges = get_data.get_random_lobster(3)
     #Nodes, Edges = get_data.get_file()
     return Nodes, Edges
 
