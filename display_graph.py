@@ -27,7 +27,7 @@ def blit(Nodes, Edges):
     # uses matplotlib to make an animation with update function update_graph
     # documentation here: https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.animation.FuncAnimation.html
     #changing interval (value in ms) changes how fast each frame changes
-    ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=2000, repeat=False, fargs=(fig, Dijkstra_Updates))
+    ani = animation.FuncAnimation(fig, update_graph, frames=framect, interval=500, repeat=True, fargs=(fig, Dijkstra_Updates))
     plt.show()
     
     #import save_to (saving animations currently not functional)

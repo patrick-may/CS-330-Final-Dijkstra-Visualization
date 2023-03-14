@@ -21,8 +21,8 @@ def get_random_normal(graph_order, num_nodes):
     And Total number of nodes is num_nodes
     Edge weight is randomly assigned between 1-10, for different weight range change randint(1,10) to desired range
     """
-
-    random.seed(time.gmtime())
+    #print(time.localtime())
+    random.seed(time.localtime().tm_sec)
     G = nx.random_regular_graph(graph_order, num_nodes)
     Edges = G.edges
     Weighted_Edges = []
